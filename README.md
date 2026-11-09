@@ -1,7 +1,6 @@
 # Verfahrenswahl: welches Verfahren, gemessen woran? – Streamlit-Demo
 
-<!-- TODO nach dem Deploy: direkt hierher den Live-Link setzen (Leerzeile davor und danach):
-**[→ Demo live ausprobieren](https://sebastianhanisch-entscheiden-lernen-wahl-demo.streamlit.app/)** -->
+**[→ Demo live ausprobieren](https://sebastianhanisch-entscheiden-lernen-wahl-demo.streamlit.app/)**
 
 Schluss der Linie **Entscheidungsorientiertes Lernen** in der „Konzepte“-Reihe für die Website „Sebastian Hanisch – Operations Research und Machine Learning“. Die Linie hat neun Demos („Stücke“): [regret-statt-fehler-demo](https://github.com/sebastian-hanisch/regret-statt-fehler-demo) (1), [newsvendor-direkt-demo](https://github.com/sebastian-hanisch/newsvendor-direkt-demo) (2), [spo-kuerzester-weg-demo](https://github.com/sebastian-hanisch/spo-kuerzester-weg-demo) (3), [zweistufig-oder-integriert-demo](https://github.com/sebastian-hanisch/zweistufig-oder-integriert-demo) (4), [gewichtete-stichprobe-demo](https://github.com/sebastian-hanisch/gewichtete-stichprobe-demo) (5), [nullgradient-glaettung-demo](https://github.com/sebastian-hanisch/nullgradient-glaettung-demo) (6), [gestoerte-optimierer-demo](https://github.com/sebastian-hanisch/gestoerte-optimierer-demo) (7), [blackbox-loeser-demo](https://github.com/sebastian-hanisch/blackbox-loeser-demo) (8) und [entscheidungs-schranke-demo](https://github.com/sebastian-hanisch/entscheidungs-schranke-demo) (9). Diese Demo misst nichts Neues an den Verfahren der Stücke: Sie **ordnet** sie in einem Entscheidungsbaum, und sie prüft für den Newsvendor eine **Wahlregel nach zwei Diagnosen auf den Trainingsdaten**.
 
