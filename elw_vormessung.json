@@ -1,0 +1,236 @@
+{
+ "quelle": "vormessung/out_eo_v11_wahlregel.txt (Seeds 0 bis 29) und vormessung/out_eo_v11_wahlregel_seeds100.txt (Seeds 100 bis 129); Zufallswald mit scikit-learn, nicht live",
+ "einheit": "Mehrkosten gegen das Orakel in Prozent (Mittel über die Zeilen; bei gesamt auch der Median)",
+ "welt_namen": {
+  "linear": "linear",
+  "streuung-linear": "streuung-linear",
+  "heteroskedastisch": "betrag",
+  "nichtlinear": "quadratisch"
+ },
+ "satz_a": {
+  "gesamt": {
+   "emp": {
+    "mittel": 33.68,
+    "median": 13.06
+   },
+   "direkt": {
+    "mittel": 35.21,
+    "median": 9.77
+   },
+   "wald": {
+    "mittel": 33.45,
+    "median": 28.5
+   },
+   "regel": {
+    "mittel": 18.84,
+    "median": 9.6
+   },
+   "beste": {
+    "mittel": 17.54,
+    "median": 7.87
+   }
+  },
+  "welten": {
+   "linear": {
+    "emp": 3.4,
+    "direkt": 6.8,
+    "wald": 22.5,
+    "regel": 3.5,
+    "beste": 3.2,
+    "wahl": {
+     "emp": 354,
+     "direkt": 3,
+     "wald": 3
+    }
+   },
+   "streuung-linear": {
+    "emp": 19.6,
+    "direkt": 9.0,
+    "wald": 39.5,
+    "regel": 11.5,
+    "beste": 8.4,
+    "wahl": {
+     "emp": 90,
+     "direkt": 252,
+     "wald": 18
+    }
+   },
+   "heteroskedastisch": {
+    "emp": 11.9,
+    "direkt": 16.2,
+    "wald": 24.4,
+    "regel": 13.0,
+    "beste": 11.3,
+    "wahl": {
+     "emp": 306,
+     "direkt": 12,
+     "wald": 42
+    }
+   },
+   "nichtlinear": {
+    "emp": 99.8,
+    "direkt": 108.8,
+    "wald": 47.4,
+    "regel": 47.4,
+    "beste": 47.3,
+    "wahl": {
+     "emp": 0,
+     "direkt": 0,
+     "wald": 360
+    }
+   }
+  },
+  "n_p": {
+   "n100_p3": {
+    "emp": 35.3,
+    "direkt": 35.1,
+    "wald": 38.8,
+    "regel": 23.8,
+    "beste": 21.9
+   },
+   "n100_p10": {
+    "emp": 39.9,
+    "direkt": 50.8,
+    "wald": 53.9,
+    "regel": 31.5,
+    "beste": 29.4
+   },
+   "n1000_p3": {
+    "emp": 29.3,
+    "direkt": 26.5,
+    "wald": 15.3,
+    "regel": 9.2,
+    "beste": 8.2
+   },
+   "n1000_p10": {
+    "emp": 30.2,
+    "direkt": 28.3,
+    "wald": 25.9,
+    "regel": 10.8,
+    "beste": 10.7
+   }
+  },
+  "diagnose": {
+   "nichtlinear_erkannt": 100,
+   "fehlalarm": 6,
+   "streuung_linear": 98,
+   "streuung_betrag": 4,
+   "streuung_linear_welt": 1
+  },
+  "zeilen": 1440,
+  "seeds": 30
+ },
+ "satz_b": {
+  "gesamt": {
+   "emp": {
+    "mittel": 33.28,
+    "median": 12.51
+   },
+   "direkt": {
+    "mittel": 35.12,
+    "median": 9.51
+   },
+   "wald": {
+    "mittel": 34.67,
+    "median": 29.67
+   },
+   "regel": {
+    "mittel": 18.75,
+    "median": 8.92
+   },
+   "beste": {
+    "mittel": 17.83,
+    "median": 7.92
+   }
+  },
+  "welten": {
+   "linear": {
+    "emp": 3.1,
+    "direkt": 7.2,
+    "wald": 23.6,
+    "regel": 3.3,
+    "beste": 3.0,
+    "wahl": {
+     "emp": 354,
+     "direkt": 3,
+     "wald": 3
+    }
+   },
+   "streuung-linear": {
+    "emp": 18.7,
+    "direkt": 9.4,
+    "wald": 41.3,
+    "regel": 11.1,
+    "beste": 8.6,
+    "wahl": {
+     "emp": 90,
+     "direkt": 258,
+     "wald": 12
+    }
+   },
+   "heteroskedastisch": {
+    "emp": 12.0,
+    "direkt": 16.5,
+    "wald": 25.4,
+    "regel": 12.3,
+    "beste": 11.5,
+    "wahl": {
+     "emp": 342,
+     "direkt": 6,
+     "wald": 12
+    }
+   },
+   "nichtlinear": {
+    "emp": 99.3,
+    "direkt": 107.3,
+    "wald": 48.3,
+    "regel": 48.3,
+    "beste": 48.2,
+    "wahl": {
+     "emp": 0,
+     "direkt": 0,
+     "wald": 360
+    }
+   }
+  },
+  "n_p": {
+   "n100_p3": {
+    "emp": 33.2,
+    "direkt": 33.7,
+    "wald": 39.0,
+    "regel": 22.6,
+    "beste": 21.5
+   },
+   "n100_p10": {
+    "emp": 40.8,
+    "direkt": 52.3,
+    "wald": 57.4,
+    "regel": 32.6,
+    "beste": 30.7
+   },
+   "n1000_p3": {
+    "emp": 29.3,
+    "direkt": 26.6,
+    "wald": 15.6,
+    "regel": 9.1,
+    "beste": 8.4
+   },
+   "n1000_p10": {
+    "emp": 29.8,
+    "direkt": 27.9,
+    "wald": 26.6,
+    "regel": 10.7,
+    "beste": 10.7
+   }
+  },
+  "diagnose": {
+   "nichtlinear_erkannt": 100,
+   "fehlalarm": 2,
+   "streuung_linear": 97,
+   "streuung_betrag": 3,
+   "streuung_linear_welt": 1
+  },
+  "zeilen": 1440,
+  "seeds": 30
+ }
+}
