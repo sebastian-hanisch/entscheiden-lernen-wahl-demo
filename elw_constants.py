@@ -123,18 +123,9 @@ ASSUMPTIONS_MARKDOWN = r"""
 | **Das Orakel ist bekannt** | Mehrkosten gegen das Orakel lassen sich nur in Simulationen messen, in denen die wahre Verteilung bekannt ist. | Auf echten Daten bleibt der Vergleich auf Testdaten. |
 """
 
+# Die Lesehilfe (Symboltabelle) steht nicht hier, sondern in app.py zwischen den Markierungen `# erklaerseite:lesehilfe`; sie wird aus der Spezifikation der
+# Erklärseite erzeugt (`tools/set_demo_explainer.py` im Website-Repo), damit der Wortlaut nur eine Quelle hat.
 FORMULAS_MARKDOWN = r"""
-**Lesehilfe.** Gegeben sind n Beobachtungen (xᵢ, yᵢ) mit Merkmalen xᵢ ∈ ℝᵖ und der Nachfrage yᵢ; gesucht ist die Wahl eines von drei Verfahren, die eine Bestellregel q(x) liefern. Die Wahl darf nur von den Trainingsdaten abhängen.
-
-| Symbol | Bedeutung |
-|---|---|
-| $n$, $p$ | Zahl der Beobachtungen, Zahl der Merkmale |
-| $\tau = b/(b+h)$ | kritisches Verhältnis: $b$ Kosten je fehlende, $h$ je überschüssige Einheit |
-| $X$, $\tilde X$ | Designmatrix $[1, x]$ mit $p + 1$ Spalten, erweiterte Designmatrix $[1, x, x^2]$ (Quadrate elementweise) mit $2p + 1$ Spalten |
-| $\mathrm{RSS}_0, \mathrm{RSS}_1$ | Summe der Fehlerquadrate des kleinen und des großen Modells |
-| $F$, $p_{\mathrm{Krümmung}}$, $p_{\mathrm{Streuung}}$ | Teststatistik und p-Wert der beiden Tests |
-| $\varepsilon_i$ | Betrag des Residuums der linearen Anpassung, $\lvert y_i - \tilde{x}_i^\top \hat\beta\rvert$ |
-
 **Newsvendor-Kosten.** Mit der Bestellmenge $q$ und der Nachfrage $D$ kostet die Entscheidung $b\,(D-q)_+ + h\,(q-D)_+ = (b+h)\,\rho_\tau(D-q)$, wobei $\rho_\tau$ der Pinball-Verlust ist. Die beste Menge ist das $\tau$-Quantil der Verteilung von $D$ bei Merkmal $x$ (das Orakel).
 
 **Test (a), Krümmung.** Kleines Modell $X$, großes Modell $\tilde X$, beide auf $y$:
@@ -147,9 +138,13 @@ $$F_b = \frac{(\mathrm{RSS}_0 - \mathrm{RSS}_1)/p}{\mathrm{RSS}_1/(n - p - 1)}, 
 
 **Regel.** Mit der Schwelle $0{,}01$:
 
-$$\text{Wahl} = \begin{cases} \text{Gewichte} & p_{\mathrm{Krümmung}} < 0{,}01, \ \text{direkt} & p_{\mathrm{Krümmung}} \ge 0{,}01,\ p_{\mathrm{Streuung}} < 0{,}01,\ n \ge 10\,(p+1), \ \text{KQ plus Quantil} & \text{sonst.} \end{cases}$$
+$$\text{Wahl} = \begin{cases}
+\text{Gewichte} & p_{\mathrm{Krümmung}} < 0{,}01, \\
+\text{direkt} & p_{\mathrm{Krümmung}} \ge 0{,}01,\ p_{\mathrm{Streuung}} < 0{,}01,\ n \ge 10\,(p+1), \\
+\text{KQ plus Quantil} & \text{sonst.}
+\end{cases}$$
 
-**Randfälle.** Ist ein Modell nicht definiert ($n - $ Spaltenzahl $\le 0$), gilt der p-Wert 1. Passt schon das kleine Modell bis auf Rundung, gilt ebenfalls 1.
+**Randfälle.** (1) Ist ein Modell nicht definiert (Freiheitsgrade im Nenner höchstens 0), gilt der p-Wert 1. (2) Passt schon das kleine Modell bis auf Rundung, gilt ebenfalls 1. (3) Passt nur das große Modell bis auf Rundung, das kleine aber nicht, gilt der p-Wert 0.
 
 **Mehrkosten.** Mit den erwarteten Kosten $K(\cdot)$ über einen festen Testsatz von Merkmalen: $100\,\bigl(K(\text{Regel}) - K(\text{Orakel})\bigr)/K(\text{Orakel})$ in Prozent.
 

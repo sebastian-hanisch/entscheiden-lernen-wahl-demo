@@ -159,13 +159,16 @@ def verdict_rule_vs_fixed() -> tuple[str, str]:
     ga, gb = V.frozen_set("a")["gesamt"], V.frozen_set("b")["gesamt"]
     name_a, best_a = V.best_fixed("a")
     name_b, best_b = V.best_fixed("b")
+    wq = V.frozen_set("a")["welten"]["nichtlinear"]
     nb = V.summarize(V.rows("a"))
     nb_best = min(nb[k]["mittel"] for k in ("emp", "direkt", "kern"))
     med_name = min(V.FIXED, key=lambda k: ga[k]["median"])
     text = (f"Vormessung mit Zufallswald (nicht live): Die Regel kostet im Mittel über alle Zeilen {de(ga['regel']['mittel'], 2)} %, das beste feste Verfahren nach dem Mittel ({V.FIXED_NAMEN[name_a]}) {de(best_a, 2)} %: "
             f"**{de(V.reduction_vs_best_fixed('a'), 0)} % weniger Mehrkosten** im Mittel über die vier Welten, nicht die Hälfte. "
-            f"Die Ersparnis entsteht in der Welt „Wahrheit quadratisch“; in den drei übrigen Welten hat ein festes Verfahren kleinere Mehrkosten, "
-            f"und im Median kostet die Regel {de(ga['regel']['median'], 2)} % gegen {de(ga[med_name]['median'], 2)} % ({V.FIXED_NAMEN[med_name]}). "
+            f"Gegen immer KQ + Quantil und immer direkt entsteht die Ersparnis in der Welt „Wahrheit quadratisch“ ({de(wq['regel'], 1)} % gegen {de(wq['emp'], 1)} / {de(wq['direkt'], 1)} %); "
+            f"gegen {V.FIXED_NAMEN[name_a]}, das Vergleichsverfahren der {de(V.reduction_vs_best_fixed('a'), 0)} %, ist die Regel dort gleich ({de(wq['regel'], 1)} gegen {de(wq[name_a], 1)} %) und gewinnt in den drei übrigen Welten. "
+            f"In diesen drei Welten hat je ein anderes festes Verfahren kleinere Mehrkosten als die Regel; kein festes Verfahren war in allen vier Welten besser. "
+            f"Im Median kostet die Regel {de(ga['regel']['median'], 2)} % gegen {de(ga[med_name]['median'], 2)} % ({V.FIXED_NAMEN[med_name]}). "
             f"Die beste Wahl je Zeile mit Kenntnis der Welt kostet im Mittel {de(ga['beste']['mittel'], 2)} %. "
             f"Unabhängige Zufalls-Seeds 100 bis 129: {de(gb['regel']['mittel'], 2)} % gegen {de(best_b, 2)} % ({V.FIXED_NAMEN[name_b]}), {de(V.reduction_vs_best_fixed('b'), 0)} % weniger. "
             f"Nachbau mit Gauß-Kerngewichten statt Wald (Seeds 0 bis 29): {de(nb['regel']['mittel'], 1)} % gegen {de(nb_best, 1)} %, "

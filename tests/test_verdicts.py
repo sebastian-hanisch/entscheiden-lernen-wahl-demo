@@ -71,8 +71,10 @@ def test_blind_spot_verdict_names_both_counts_and_the_wrong_choice():
 def test_rule_vs_fixed_verdict_says_44_percent_and_not_half_and_names_the_sets():
     kind, text = ev.verdict_rule_vs_fixed()
     assert kind == "success"
-    for part in ("18,84 %", "33,45 %", "immer Wald-Gewichte", "**44 % weniger Mehrkosten** im Mittel über die vier Welten, nicht die Hälfte", "in den drei übrigen Welten hat ein festes Verfahren kleinere Mehrkosten",
-                 "im Median kostet die Regel 9,60 % gegen 9,77 % (immer direkt)", "17,54 %", "18,75 % gegen 33,28 %", "immer KQ + Quantil",
+    for part in ("18,84 %", "33,45 %", "immer Wald-Gewichte", "**44 % weniger Mehrkosten** im Mittel über die vier Welten, nicht die Hälfte", "Gegen immer KQ + Quantil und immer direkt entsteht die Ersparnis in der Welt „Wahrheit quadratisch“ (47,4 % gegen 99,8 / 108,8 %)",
+                 "gegen immer Wald-Gewichte, das Vergleichsverfahren der 44 %, ist die Regel dort gleich (47,4 gegen 47,4 %) und gewinnt in den drei übrigen Welten",
+                 "je ein anderes festes Verfahren kleinere Mehrkosten als die Regel; kein festes Verfahren war in allen vier Welten besser",
+                 "Im Median kostet die Regel 9,60 % gegen 9,77 % (immer direkt)", "17,54 %", "18,75 % gegen 33,28 %", "immer KQ + Quantil",
                  "Seeds 100 bis 129", "23,2 % gegen 33,7 %", "31 % weniger", "nicht für echte Daten"):
         assert part in text, part
 
@@ -80,3 +82,29 @@ def test_rule_vs_fixed_verdict_says_44_percent_and_not_half_and_names_the_sets()
 def test_number_formatting_uses_the_decimal_comma():
     assert ev.de(3.14159, 2) == "3,14" and ev.pct(0.0) == "0,0 %" and ev.tau_text(0.95) == "0,95" and ev.tau_text(0.5) == "0,5"
     assert ev.p_text(0.00001) == "< 0,0001" and ev.p_text(0.0311) == "0,0311"
+
+
+def test_the_saving_is_not_attributed_to_the_quadratic_world_against_the_forest():
+    """Gegen immer Wald (das Vergleichsverfahren der 44 %) ist die Regel in der quadratischen Welt gleich und gewinnt in den drei übrigen Welten (Seeds 0 bis 29, Vormessung)."""
+    import elw_vormessung as V
+    w = V.frozen_set("a")["welten"]
+    assert w["nichtlinear"]["regel"] == w["nichtlinear"]["wald"] == 47.4
+    assert all(w[k]["regel"] < w[k]["wald"] for k in ("linear", "streuung-linear", "heteroskedastisch"))
+    text = ev.verdict_rule_vs_fixed()[1]
+    assert "Die Ersparnis entsteht in der Welt „Wahrheit quadratisch“;" not in text   # die frühere, nur gegen KQ + Quantil und direkt gültige Fassung
+
+
+def test_formula_list_has_line_breaks_in_the_cases_all_three_edge_cases_and_no_second_reading_aid():
+    """Die Fallunterscheidung der Regel braucht den Zeilenumbruch (zwei Backslashes) zwischen den Zeilen (ein Heredoc hatte sie auf einen verkürzt); die Randfälle der README
+    stehen alle in der Formelliste; die Lesehilfe steht nur einmal in der App (erzeugt aus der Spezifikation der Erklärseite), nicht noch einmal in der Formelliste."""
+    import re
+    from pathlib import Path
+    import elw_constants as C
+    f = C.FORMULAS_MARKDOWN
+    cases = re.search(r"\\begin\{cases\}(.*?)\\end\{cases\}", f, re.S).group(1)
+    assert cases.count("\\\\") == 2 and cases.count("&") == 3
+    for part in ("(1) Ist ein Modell nicht definiert", "(2) Passt schon das kleine Modell", "(3) Passt nur das große Modell bis auf Rundung", "gilt der p-Wert 0"):
+        assert part in f, part
+    assert "Lesehilfe" not in f and "tilde{x}" not in f
+    app = (Path(__file__).resolve().parent.parent / "app.py").read_text(encoding="utf-8")
+    assert app.count("**Lesehilfe.**") == 1

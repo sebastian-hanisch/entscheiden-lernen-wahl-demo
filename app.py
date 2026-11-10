@@ -62,9 +62,22 @@ Die Linie **Entscheidungsorientiertes Lernen** hat neun Verfahren gezeigt, und k
 gewinnt, und eine **Wahlregel** trifft die Wahl für den Newsvendor aus **zwei Diagnosen auf den Trainingsdaten** (Ist die Form gekrümmt? Hängt die Streuung linear von den Merkmalen ab?).
 Gemessen wird in simulierten Welten als **Mehrkosten gegen das Orakel**, das die wahre Verteilung kennt; die Aussagen gelten nur für diese Welten, nicht für echte Daten.
 
-Weiter unten: vier Experimente (🔬), der Abschnitt **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
+Wer die Verfahrenswahl zuerst ohne Fachbegriffe verstehen will, öffnet **💬 In einfachen Worten**. Weiter unten: vier Experimente (🔬), der Abschnitt **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
 """
 )
+
+# erklaerseite:einfach:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/welcher-weg-gewinnt-erklaert.json, nicht von Hand ändern)
+with st.expander("💬 In einfachen Worten"):
+    st.markdown(
+        """
+Aus früheren Tagen lässt sich eine Bestellmenge auf mehreren Wegen ableiten: den erwarteten Absatz bestellen, eine Prognose mit Sicherheitszuschlag, direkt auf den Kosten lernen oder ähnliche Tage gewichten. In den gemessenen Welten gewinnt kein Weg überall. Die Demo zeigt, wovon es abhängt: von zwei Fragen an die eigenen Daten.
+
+Erste Frage: Ist der Zusammenhang zwischen Umständen und Nachfrage gekrümmt statt gerade? Zweite Frage: Schwankt die Streuung mit den Umständen? Ein Entscheidungsbaum ordnet die Verfahren danach, und eine Wahlregel trifft die Wahl aus den Daten selbst. Sie hat einen blinden Fleck: Eine Streuung, die an beiden Enden groß und in der Mitte klein ist, erkennt sie nicht. Gemessen wird in erfundenen Welten, die Aussagen gelten nicht für echte Daten.
+
+[Ausführlich und verständlich erklärt, mit Fachteil](https://sebastianhanisch.net/welcher-weg-gewinnt-erklaert.html)
+        """
+    )
+# erklaerseite:einfach:end
 
 with st.expander("So funktioniert die Verfahrenswahl", expanded=True):
     st.markdown(
@@ -288,11 +301,29 @@ st.markdown(C.ASSUMPTIONS_MARKDOWN)
 st.markdown("---")
 
 with st.expander("📐 Mathematische Formulierung"):
+    # erklaerseite:lesehilfe:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/welcher-weg-gewinnt-erklaert.json, nicht von Hand ändern)
+    st.markdown(
+        r"""
+**Lesehilfe.** Gegeben sind $n$ Beobachtungen $(x_i, y_i)$ mit Merkmalen $x_i \in \mathbb{R}^p$ und der Nachfrage $y_i$; gesucht ist die Wahl eines von drei Verfahren, die eine Bestellregel $q(x)$ liefern. Die Wahl darf nur von den Trainingsdaten abhängen.
+
+| Symbol | Bedeutung |
+|---|---|
+| $n$, $p$ | Zahl der Beobachtungen, Zahl der Merkmale |
+| $\tau = b/(b+h)$ | kritisches Verhältnis: $b$ Kosten je fehlende, $h$ je überschüssige Einheit |
+| $X$, $\tilde X$ | Designmatrix $[1, x]$ mit $p + 1$ Spalten, erweiterte Designmatrix $[1, x, x^2]$ (Quadrate elementweise) mit $2p + 1$ Spalten |
+| $\mathrm{RSS}_0, \mathrm{RSS}_1$ | Summe der Fehlerquadrate des kleinen und des großen Modells |
+| $F$, $p_{\mathrm{Krümmung}}$, $p_{\mathrm{Streuung}}$ | Teststatistik und p-Wert der beiden Tests |
+| $\varepsilon_i$ | Betrag des Residuums der linearen Anpassung von $y$ auf $X$ |
+
+[Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/welcher-weg-gewinnt-erklaert.html#fachleute)
+        """
+    )
+    # erklaerseite:lesehilfe:end
     st.markdown(C.FORMULAS_MARKDOWN)
 
 st.markdown("---")
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
     "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
-    "Mehr zu den Demos: [Interaktive Demos](https://sebastianhanisch.net/demos.html)."
+    "Mehr zur Reihe: [Entscheidungsorientiert: Regret bis Wahl](https://sebastianhanisch.net/konzepte-entscheidungsorientiert.html)."
 )
